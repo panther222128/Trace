@@ -33,17 +33,6 @@ final class CoreDataStorage {
         }
     }
     
-    func fetchTraceEntities() -> [Trace] {
-        let context = persistentContainer.viewContext
-        let fetchRequest: NSFetchRequest<TraceEntity> = TraceEntity.fetchRequest()
-        do {
-            let result = try context.fetch(fetchRequest).map { $0.toDomain() }
-            return result
-        } catch {
-            return []
-        }
-    }
-    
     func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Void) {
         persistentContainer.performBackgroundTask(block)
     }

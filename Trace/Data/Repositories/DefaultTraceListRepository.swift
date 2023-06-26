@@ -18,7 +18,11 @@ final class DefaultTraceListRepository: TraceListRepository {
 }
 
 extension DefaultTraceListRepository {
-    func fetchTraces() -> [Trace] {
-        return traceStorage.fetchTraces()
+    func fetchTraces(completion: @escaping (Result<[Trace], Error>) -> Void) {
+        return traceStorage.fetchTraces(completion: completion)
+    }
+    
+    func deleteTrace(at indexPath: IndexPath, completion: @escaping (Result<[Trace], Error>) -> Void) {
+        return traceStorage.deleteTrace(at: indexPath, completion: completion)
     }
 }

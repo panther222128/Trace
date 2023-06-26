@@ -8,5 +8,6 @@
 import Foundation
 
 protocol TraceListRepository {
-    func fetchTraces() -> [Trace]
+    func fetchTraces(completion: @escaping (Result<[Trace], Error>) -> Void)
+    func deleteTrace(at indexPath: IndexPath, completion: @escaping (Result<[Trace], Error>) -> Void)
 }

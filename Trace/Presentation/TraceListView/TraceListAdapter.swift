@@ -15,6 +15,7 @@ protocol TraceListDataSource: AnyObject {
 protocol TraceListDelegate: AnyObject {
     func didSelectItem(at indexPath: IndexPath)
     func heightForRow(at indexPath: IndexPath) -> CGFloat
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
 }
 
 final class TraceListAdapter: NSObject {
@@ -58,5 +59,9 @@ extension TraceListAdapter: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return delegate?.heightForRow(at: indexPath) ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        return delegate?.tableView(tableView, trailingSwipeActionsConfigurationForRowAt: indexPath)
     }
 }

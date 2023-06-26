@@ -25,10 +25,13 @@ final class TraceListViewController: UIViewController, StoryboardInstantiable {
         traceListAdapter = TraceListAdapter(tableView: traceListTableView, dataSource: viewModel, delegate: self)
         setAddButton()
         subscribeItem()
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         viewModel.didFetchItems()
     }
-
+    
     static func create(with viewModel: TraceListViewModel) -> TraceListViewController {
         let viewController = TraceListViewController.instantiateViewController()
         viewController.viewModel = viewModel
@@ -42,10 +45,10 @@ extension TraceListViewController {
     private func subscribeItem() {
         viewModel.items
             .receive(on: DispatchQueue.main)
-            .sink { success in
-                
-            } receiveValue: { _ in
-                self.traceListTableView.reloadData()
+            .sink { [weak self] success in
+                self?.traceListTableView.reloadData()
+            } receiveValue: { [weak self] _ in
+                self?.traceListTableView.reloadData()
             }
             .store(in: &cancellable)
     }
@@ -66,10 +69,22 @@ extension TraceListViewController {
 // MARK: - Delegate
 extension TraceListViewController: TraceListDelegate {
     func didSelectItem(at indexPath: IndexPath) {
-        
+        viewModel.didSelectItem(at: indexPath)
     }
     
     func heightForRow(at indexPath: IndexPath) -> CGFloat {
         return 40
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let swipeAction = UIContextualAction(style: .normal, title: "Delete", handler: { [weak self] (action, view, completion) in
+            self?.viewModel.didDeleteItem(at: indexPath)
+            completion(true)
+        })
+        swipeAction.backgroundColor = UIColor.blue
+        
+        let configuration = UISwipeActionsConfiguration(actions: [swipeAction])
+        
+        return configuration
     }
 }

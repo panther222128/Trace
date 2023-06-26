@@ -62,3 +62,13 @@ extension SceneDIContainer {
         return TraceAddViewController.create(with: makeTraceAddViewModel())
     }
 }
+
+extension SceneDIContainer {
+    func makeTraceDetailViewModel(of trace: Trace) -> TraceDetailViewModel {
+        return TraceDetailViewModel(trace: trace)
+    }
+    
+    func makeTraceDetailViewController(of trace: Trace) -> TraceDetailViewController {
+        return TraceDetailViewController.create(with: makeTraceDetailViewModel(of: trace))
+    }
+}
