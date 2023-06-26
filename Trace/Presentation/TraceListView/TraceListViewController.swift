@@ -10,6 +10,9 @@ import Combine
 
 final class TraceListViewController: UIViewController, StoryboardInstantiable {
     
+    static let storyboardName = "TraceListViewController"
+    static let storyboardID = "TraceListViewController"
+    
     @IBOutlet weak var traceListTableView: UITableView!
     
     private var viewModel: TraceListViewModel!

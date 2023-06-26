@@ -16,7 +16,6 @@ final class CoreDataStorage {
         let container = NSPersistentContainer(name: "CoreDataStorage")
         container.loadPersistentStores { _, error in
             if let error = error as NSError? {
-                // TODO: - Log to Crashlytics
                 assertionFailure("CoreDataStorage Unresolved error \(error), \(error.userInfo)")
             }
         }
@@ -33,7 +32,18 @@ final class CoreDataStorage {
             }
         }
     }
-
+    
+    func fetchTraceEntities() -> [Trace] {
+        let context = persistentContainer.viewContext
+        let fetchRequest: NSFetchRequest<TraceEntity> = TraceEntity.fetchRequest()
+        do {
+            let result = try context.fetch(fetchRequest).map { $0.toDomain() }
+            return result
+        } catch {
+            return []
+        }
+    }
+    
     func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Void) {
         persistentContainer.performBackgroundTask(block)
     }

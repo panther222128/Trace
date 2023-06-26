@@ -8,7 +8,7 @@
 import Foundation
 
 protocol TraceListUseCase {
-    func fetchTraces(completion: @escaping (Result<[Trace], Error>) -> Void)
+    func fetchTraces() -> [Trace]
 }
 
 final class DefaultTraceListUseCase: TraceListUseCase {
@@ -19,8 +19,8 @@ final class DefaultTraceListUseCase: TraceListUseCase {
         self.repository = repository
     }
     
-    func fetchTraces(completion: @escaping (Result<[Trace], Error>) -> Void) {
-        repository.fetchTraces(completion: completion)
+    func fetchTraces() -> [Trace] {
+        return repository.fetchTraces()
     }
     
 }

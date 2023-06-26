@@ -10,6 +10,7 @@ import CoreData
 
 protocol TraceStorage {
     func fetchTraces(completion: @escaping (Result<[Trace], Error>) -> Void)
+    func fetchTraces() -> [Trace]
     func save(trace: Trace, completion: @escaping (Result<Trace, Error>) -> Void)
 }
 
@@ -34,6 +35,10 @@ extension DefaultTraceStorage: TraceStorage {
                 
             }
         }
+    }
+    
+    func fetchTraces() -> [Trace] {
+        return coreDataStorage.fetchTraceEntities()
     }
     
     func save(trace: Trace, completion: @escaping (Result<Trace, Error>) -> Void) {

@@ -40,14 +40,8 @@ final class DefaultTraceListViewModel: TraceListViewModel {
     }
     
     func didFetchItems() {
-        useCase.fetchTraces { result in
-            switch result {
-            case .success(let traces):
-                print(traces)
-            case .failure(let failure):
-                print(failure)
-            }
-        }
+        traces = useCase.fetchTraces()
+        items.value = traces.map { .init(trace: $0) }
     }
     
 }
