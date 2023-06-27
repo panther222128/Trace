@@ -8,7 +8,7 @@
 import UIKit
 
 final class SceneDIContainer: ViewFlowCoordinatorDependencies {
- 
+    
     struct Dependencies {
         let apiDataTransferService: DataTransferService
     }
@@ -64,11 +64,19 @@ extension SceneDIContainer {
 }
 
 extension SceneDIContainer {
-    func makeTraceDetailViewModel(of trace: Trace) -> TraceDetailViewModel {
-        return TraceDetailViewModel(trace: trace)
+    func makeTraceDetailRepository() -> TraceDetailRepository {
+        return DefaultTraceDetailRepository(traceStorage: traceStorage)
     }
     
-    func makeTraceDetailViewController(of trace: Trace) -> TraceDetailViewController {
-        return TraceDetailViewController.create(with: makeTraceDetailViewModel(of: trace))
+    func makeTraceDetailUseCase() -> TraceDetailUseCase {
+        return DefaultTraceDetailUseCase(repository: makeTraceDetailRepository())
+    }
+    
+    func makeTraceDetailViewModel(of trace: Trace, indexPath: IndexPath) -> TraceDetailViewModel {
+        return DefaultTraceDetailViewModel(useCase: makeTraceDetailUseCase(), trace: trace, indexPath: indexPath)
+    }
+    
+    func makeTraceDetailViewController(of trace: Trace, indexPath: IndexPath) -> TraceDetailViewController {
+        return TraceDetailViewController.create(with: makeTraceDetailViewModel(of: trace, indexPath: indexPath))
     }
 }

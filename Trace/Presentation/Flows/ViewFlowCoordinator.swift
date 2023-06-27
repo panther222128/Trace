@@ -10,7 +10,7 @@ import UIKit
 protocol ViewFlowCoordinatorDependencies {
     func makeTraceListViewController(action: TraceListAction) -> TraceListViewController
     func makeTraceAddViewController() -> TraceAddViewController
-    func makeTraceDetailViewController(of trace: Trace) -> TraceDetailViewController
+    func makeTraceDetailViewController(of trace: Trace, indexPath: IndexPath) -> TraceDetailViewController
 }
 
 final class ViewFlowCoordinator {
@@ -32,7 +32,7 @@ final class ViewFlowCoordinator {
         navigationController = UINavigationController()
         guard let navigationController = navigationController else { return }
         
-        let action = TraceListAction(addTrace: showTraceAddView, select: showTraceDetailView(of:))
+        let action = TraceListAction(addTrace: showTraceAddView, select: showTraceDetailView)
         
         let traceListViewController = dependencies.makeTraceListViewController(action: action)
         
@@ -47,8 +47,8 @@ final class ViewFlowCoordinator {
         navigationController?.pushViewController(viewController, animated: true)
     }
 
-    private func showTraceDetailView(of trace: Trace) {
-        let viewController = dependencies.makeTraceDetailViewController(of: trace)
+    private func showTraceDetailView(of trace: Trace, indexPath: IndexPath) {
+        let viewController = dependencies.makeTraceDetailViewController(of: trace, indexPath: indexPath)
         navigationController?.pushViewController(viewController, animated: true)
     }
     

@@ -12,6 +12,7 @@ protocol TraceStorage {
     func fetchTraces(completion: @escaping (Result<[Trace], Error>) -> Void)
     func save(trace: Trace, completion: @escaping (Result<Trace, Error>) -> Void)
     func deleteTrace(at indexPath: IndexPath, completion: @escaping (Result<[Trace], Error>) -> Void)
+    func updateTrace(at indexPath: IndexPath, with trace: Trace, completion: @escaping (Result<Trace, Error>) -> Void)
 }
 
 final class DefaultTraceStorage {
@@ -59,6 +60,24 @@ extension DefaultTraceStorage: TraceStorage {
                 try context.save()
                 
                 completion(.success(result.map { $0.toDomain() }))
+            } catch {
+                
+            }
+        }
+    }
+    
+    func updateTrace(at indexPath: IndexPath, with trace: Trace, completion: @escaping (Result<Trace, Error>) -> Void) {
+        coreDataStorage.performBackgroundTask { [weak self] context in
+            do {
+                let request: NSFetchRequest = TraceEntity.fetchRequest()
+                let traces = try context.fetch(request)
+                let target = traces[indexPath.row]
+                
+                target.setValue(trace.title, forKey: "title")
+                target.setValue(trace.content, forKey: "content")
+                
+                try context.save()
+                completion(.success(trace))
             } catch {
                 
             }

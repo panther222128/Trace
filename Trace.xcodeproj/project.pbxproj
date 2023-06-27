@@ -44,6 +44,9 @@
 		A09246A92A4940C4003CBAB4 /* TraceStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09246A82A4940C4003CBAB4 /* TraceStorage.swift */; };
 		A09246AB2A4940EF003CBAB4 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09246AA2A4940EF003CBAB4 /* CoreDataStorage.swift */; };
 		A09246AC2A4943EB003CBAB4 /* TraceEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02777BB2A493BC0009C3F42 /* TraceEntity+CoreDataClass.swift */; };
+		A93C3D7D2A4AF9620030BA04 /* DefaultTraceDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93C3D7C2A4AF9620030BA04 /* DefaultTraceDetailRepository.swift */; };
+		A93C3D7F2A4AF9880030BA04 /* TraceDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93C3D7E2A4AF9880030BA04 /* TraceDetailRepository.swift */; };
+		A93C3D812A4AFBCE0030BA04 /* TraceDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93C3D802A4AFBCE0030BA04 /* TraceDetailUseCase.swift */; };
 		A9500C5E2A49CB8C0066ADBA /* TraceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9500C5D2A49CB8C0066ADBA /* TraceDetailViewController.swift */; };
 		A9500C602A49CB960066ADBA /* TraceDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9500C5F2A49CB960066ADBA /* TraceDetailViewModel.swift */; };
 		A9500C622A49CC4E0066ADBA /* TraceDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9500C612A49CC4E0066ADBA /* TraceDetailViewController.storyboard */; };
@@ -89,6 +92,9 @@
 		A02777BB2A493BC0009C3F42 /* TraceEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TraceEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		A09246A82A4940C4003CBAB4 /* TraceStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceStorage.swift; sourceTree = "<group>"; };
 		A09246AA2A4940EF003CBAB4 /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
+		A93C3D7C2A4AF9620030BA04 /* DefaultTraceDetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTraceDetailRepository.swift; sourceTree = "<group>"; };
+		A93C3D7E2A4AF9880030BA04 /* TraceDetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceDetailRepository.swift; sourceTree = "<group>"; };
+		A93C3D802A4AFBCE0030BA04 /* TraceDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceDetailUseCase.swift; sourceTree = "<group>"; };
 		A9500C5D2A49CB8C0066ADBA /* TraceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceDetailViewController.swift; sourceTree = "<group>"; };
 		A9500C5F2A49CB960066ADBA /* TraceDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceDetailViewModel.swift; sourceTree = "<group>"; };
 		A9500C612A49CC4E0066ADBA /* TraceDetailViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TraceDetailViewController.storyboard; sourceTree = "<group>"; };
@@ -216,6 +222,7 @@
 			children = (
 				A027779B2A492BD8009C3F42 /* TraceListRepository.swift */,
 				A02777A82A4933AC009C3F42 /* TraceAddRepository.swift */,
+				A93C3D7E2A4AF9880030BA04 /* TraceDetailRepository.swift */,
 			);
 			path = Interfaces;
 			sourceTree = "<group>";
@@ -259,6 +266,7 @@
 			children = (
 				A027779D2A492BE6009C3F42 /* DefaultTraceListRepository.swift */,
 				A02777A62A49338E009C3F42 /* DefaultTraceAddRepository.swift */,
+				A93C3D7C2A4AF9620030BA04 /* DefaultTraceDetailRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -296,6 +304,7 @@
 			children = (
 				A02777992A492B51009C3F42 /* TraceListUseCase.swift */,
 				A02777AA2A493424009C3F42 /* TraceAddUseCase.swift */,
+				A93C3D802A4AFBCE0030BA04 /* TraceDetailUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -414,9 +423,12 @@
 				A9500C5E2A49CB8C0066ADBA /* TraceDetailViewController.swift in Sources */,
 				A09246AB2A4940EF003CBAB4 /* CoreDataStorage.swift in Sources */,
 				A027776E2A491FFE009C3F42 /* AppConfiguration.swift in Sources */,
+				A93C3D7D2A4AF9620030BA04 /* DefaultTraceDetailRepository.swift in Sources */,
 				A027776A2A491FEC009C3F42 /* AppDIContainer.swift in Sources */,
+				A93C3D812A4AFBCE0030BA04 /* TraceDetailUseCase.swift in Sources */,
 				A02777892A4920E7009C3F42 /* Encodable.swift in Sources */,
 				A02777AB2A493424009C3F42 /* TraceAddUseCase.swift in Sources */,
+				A93C3D7F2A4AF9880030BA04 /* TraceDetailRepository.swift in Sources */,
 				A9500C602A49CB960066ADBA /* TraceDetailViewModel.swift in Sources */,
 				A027779E2A492BE6009C3F42 /* DefaultTraceListRepository.swift in Sources */,
 				A09246A92A4940C4003CBAB4 /* TraceStorage.swift in Sources */,

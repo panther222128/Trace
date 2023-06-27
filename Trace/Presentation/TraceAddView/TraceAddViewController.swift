@@ -18,7 +18,7 @@ final class TraceAddViewController: UIViewController, StoryboardInstantiable {
     override func viewDidLoad() {
         super.viewDidLoad()
         subscribeContent()
-        setSaveButton()
+        setDoneButton()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -57,16 +57,11 @@ extension TraceAddViewController {
     }
 }
 
-// MARK: - 
-extension TraceAddViewController: UITextViewDelegate {
-    
-}
-
 // MARK: - Save trace button
 extension TraceAddViewController {
-    private func setSaveButton() {
-        let addButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(saveButtonAction))
-        navigationItem.rightBarButtonItem = addButton
+    private func setDoneButton() {
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(saveButtonAction))
+        navigationItem.rightBarButtonItem = doneButton
     }
     
     @objc private func saveButtonAction() {

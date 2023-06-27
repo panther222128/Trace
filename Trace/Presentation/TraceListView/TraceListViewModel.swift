@@ -20,7 +20,7 @@ protocol TraceListViewModel: TraceListDataSource {
 
 struct TraceListAction {
     let addTrace: () -> Void
-    let select: (Trace) -> Void
+    let select: (Trace, IndexPath) -> Void
 }
 
 final class DefaultTraceListViewModel: TraceListViewModel {
@@ -44,7 +44,7 @@ final class DefaultTraceListViewModel: TraceListViewModel {
     }
     
     func didSelectItem(at indexPath: IndexPath) {
-        action.select(traces[indexPath.row])
+        action.select(traces[indexPath.row], indexPath)
     }
     
     func didFetchItems() {
