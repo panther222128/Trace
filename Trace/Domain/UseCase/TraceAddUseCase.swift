@@ -13,9 +13,9 @@ protocol TraceAddUseCase {
 
 final class DefaultTraceAddUseCase: TraceAddUseCase {
     
-    private let repository: TraceAddRepository
+    private let repository: TraceRepository
     
-    init(repository: TraceAddRepository) {
+    init(repository: TraceRepository) {
         self.repository = repository
     }
     

@@ -14,9 +14,9 @@ protocol TraceListUseCase {
 
 final class DefaultTraceListUseCase: TraceListUseCase {
     
-    private let repository: TraceListRepository
+    private let repository: TraceRepository
     
-    init(repository: TraceListRepository) {
+    init(repository: TraceRepository) {
         self.repository = repository
     }
     

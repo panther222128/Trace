@@ -25,15 +25,15 @@ final class SceneDIContainer: ViewFlowCoordinatorDependencies {
         return ViewFlowCoordinator(tabBarController: tabBarController, dependencies: self)
     }
     
+    func makeTraceRepository() -> TraceRepository {
+        return DefaultTraceRepository(traceStorage: traceStorage)
+    }
+    
 }
 
 extension SceneDIContainer {
-    func makeTraceListRepository() -> TraceListRepository {
-        return DefaultTraceListRepository(traceStorage: traceStorage)
-    }
-    
     func makeTraceListUseCase() -> TraceListUseCase {
-        return DefaultTraceListUseCase(repository: makeTraceListRepository())
+        return DefaultTraceListUseCase(repository: makeTraceRepository())
     }
     
     func makeTraceListViewModel(action: TraceListAction) -> TraceListViewModel {
@@ -46,12 +46,8 @@ extension SceneDIContainer {
 }
 
 extension SceneDIContainer {
-    func makeTraceAddRepository() -> TraceAddRepository {
-        return DefaultTraceAddRepository(traceStorage: traceStorage)
-    }
-    
     func makeTraceAddUseCase() -> TraceAddUseCase {
-        return DefaultTraceAddUseCase(repository: makeTraceAddRepository())
+        return DefaultTraceAddUseCase(repository: makeTraceRepository())
     }
     
     func makeTraceAddViewModel() -> TraceAddViewModel {
@@ -64,12 +60,8 @@ extension SceneDIContainer {
 }
 
 extension SceneDIContainer {
-    func makeTraceDetailRepository() -> TraceDetailRepository {
-        return DefaultTraceDetailRepository(traceStorage: traceStorage)
-    }
-    
     func makeTraceDetailUseCase() -> TraceDetailUseCase {
-        return DefaultTraceDetailUseCase(repository: makeTraceDetailRepository())
+        return DefaultTraceDetailUseCase(repository: makeTraceRepository())
     }
     
     func makeTraceDetailViewModel(of trace: Trace, indexPath: IndexPath) -> TraceDetailViewModel {
