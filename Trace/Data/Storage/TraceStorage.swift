@@ -10,7 +10,7 @@ import CoreData
 
 protocol TraceStorage {
     func fetchTraces(completion: @escaping (Result<[Trace], Error>) -> Void)
-    func save(trace: Trace, completion: @escaping (Result<Trace, Error>) -> Void)
+    func save(trace: Trace)
     func deleteTrace(at indexPath: IndexPath, completion: @escaping (Result<[Trace], Error>) -> Void)
     func updateTrace(at indexPath: IndexPath, with trace: Trace, completion: @escaping (Result<Trace, Error>) -> Void)
 }
@@ -38,13 +38,11 @@ extension DefaultTraceStorage: TraceStorage {
         }
     }
 
-    func save(trace: Trace, completion: @escaping (Result<Trace, Error>) -> Void) {
+    func save(trace: Trace) {
         coreDataStorage.performBackgroundTask { [weak self] context in
             do {
                 let entity = TraceEntity(trace: trace, insertInto: context)
                 try context.save()
-
-                completion(.success(entity.toDomain()))
             } catch {
                 
             }

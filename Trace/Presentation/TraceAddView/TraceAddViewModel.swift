@@ -25,14 +25,7 @@ final class DefaultTraceAddViewModel: TraceAddViewModel {
     }
     
     func didSelectSave(trace: Trace) {
-        useCase.save(trace: trace) { result in
-            switch result {
-            case .success(let success):
-                print(success)
-            case .failure(let failure):
-                print(failure)
-            }
-        }
+        useCase.save(trace: trace)
     }
     
 }

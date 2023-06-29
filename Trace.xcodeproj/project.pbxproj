@@ -32,20 +32,14 @@
 		A02777952A49261E009C3F42 /* TraceListItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02777942A49261E009C3F42 /* TraceListItemViewModel.swift */; };
 		A02777972A4929C9009C3F42 /* Trace.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02777962A4929C9009C3F42 /* Trace.swift */; };
 		A027779A2A492B51009C3F42 /* TraceListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02777992A492B51009C3F42 /* TraceListUseCase.swift */; };
-		A027779C2A492BD8009C3F42 /* TraceListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A027779B2A492BD8009C3F42 /* TraceListRepository.swift */; };
-		A027779E2A492BE6009C3F42 /* DefaultTraceListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A027779D2A492BE6009C3F42 /* DefaultTraceListRepository.swift */; };
 		A02777A12A492F62009C3F42 /* TraceAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02777A02A492F62009C3F42 /* TraceAddViewController.swift */; };
 		A02777A32A492F6D009C3F42 /* TraceAddViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A02777A22A492F6D009C3F42 /* TraceAddViewController.storyboard */; };
 		A02777A52A492FA8009C3F42 /* TraceAddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02777A42A492FA8009C3F42 /* TraceAddViewModel.swift */; };
-		A02777A72A49338E009C3F42 /* DefaultTraceAddRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02777A62A49338E009C3F42 /* DefaultTraceAddRepository.swift */; };
-		A02777A92A4933AC009C3F42 /* TraceAddRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02777A82A4933AC009C3F42 /* TraceAddRepository.swift */; };
 		A02777AB2A493424009C3F42 /* TraceAddUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02777AA2A493424009C3F42 /* TraceAddUseCase.swift */; };
 		A02777BA2A493B5C009C3F42 /* CoreDataStorage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A02777B82A493B5C009C3F42 /* CoreDataStorage.xcdatamodeld */; };
 		A09246A92A4940C4003CBAB4 /* TraceStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09246A82A4940C4003CBAB4 /* TraceStorage.swift */; };
 		A09246AB2A4940EF003CBAB4 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09246AA2A4940EF003CBAB4 /* CoreDataStorage.swift */; };
 		A09246AC2A4943EB003CBAB4 /* TraceEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02777BB2A493BC0009C3F42 /* TraceEntity+CoreDataClass.swift */; };
-		A93C3D7D2A4AF9620030BA04 /* DefaultTraceDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93C3D7C2A4AF9620030BA04 /* DefaultTraceDetailRepository.swift */; };
-		A93C3D7F2A4AF9880030BA04 /* TraceDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93C3D7E2A4AF9880030BA04 /* TraceDetailRepository.swift */; };
 		A93C3D812A4AFBCE0030BA04 /* TraceDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93C3D802A4AFBCE0030BA04 /* TraceDetailUseCase.swift */; };
 		A93C3D832A4B11370030BA04 /* DefaultTraceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93C3D822A4B11370030BA04 /* DefaultTraceRepository.swift */; };
 		A93C3D852A4B11460030BA04 /* TraceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93C3D842A4B11460030BA04 /* TraceRepository.swift */; };
@@ -82,20 +76,14 @@
 		A02777942A49261E009C3F42 /* TraceListItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceListItemViewModel.swift; sourceTree = "<group>"; };
 		A02777962A4929C9009C3F42 /* Trace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trace.swift; sourceTree = "<group>"; };
 		A02777992A492B51009C3F42 /* TraceListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceListUseCase.swift; sourceTree = "<group>"; };
-		A027779B2A492BD8009C3F42 /* TraceListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceListRepository.swift; sourceTree = "<group>"; };
-		A027779D2A492BE6009C3F42 /* DefaultTraceListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTraceListRepository.swift; sourceTree = "<group>"; };
 		A02777A02A492F62009C3F42 /* TraceAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceAddViewController.swift; sourceTree = "<group>"; };
 		A02777A22A492F6D009C3F42 /* TraceAddViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TraceAddViewController.storyboard; sourceTree = "<group>"; };
 		A02777A42A492FA8009C3F42 /* TraceAddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceAddViewModel.swift; sourceTree = "<group>"; };
-		A02777A62A49338E009C3F42 /* DefaultTraceAddRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTraceAddRepository.swift; sourceTree = "<group>"; };
-		A02777A82A4933AC009C3F42 /* TraceAddRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceAddRepository.swift; sourceTree = "<group>"; };
 		A02777AA2A493424009C3F42 /* TraceAddUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceAddUseCase.swift; sourceTree = "<group>"; };
 		A02777B92A493B5C009C3F42 /* Trace.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Trace.xcdatamodel; sourceTree = "<group>"; };
 		A02777BB2A493BC0009C3F42 /* TraceEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TraceEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		A09246A82A4940C4003CBAB4 /* TraceStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceStorage.swift; sourceTree = "<group>"; };
 		A09246AA2A4940EF003CBAB4 /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
-		A93C3D7C2A4AF9620030BA04 /* DefaultTraceDetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTraceDetailRepository.swift; sourceTree = "<group>"; };
-		A93C3D7E2A4AF9880030BA04 /* TraceDetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceDetailRepository.swift; sourceTree = "<group>"; };
 		A93C3D802A4AFBCE0030BA04 /* TraceDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceDetailUseCase.swift; sourceTree = "<group>"; };
 		A93C3D822A4B11370030BA04 /* DefaultTraceRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTraceRepository.swift; sourceTree = "<group>"; };
 		A93C3D842A4B11460030BA04 /* TraceRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceRepository.swift; sourceTree = "<group>"; };
@@ -224,9 +212,6 @@
 		A02777712A49200E009C3F42 /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				A027779B2A492BD8009C3F42 /* TraceListRepository.swift */,
-				A02777A82A4933AC009C3F42 /* TraceAddRepository.swift */,
-				A93C3D7E2A4AF9880030BA04 /* TraceDetailRepository.swift */,
 				A93C3D842A4B11460030BA04 /* TraceRepository.swift */,
 			);
 			path = Interfaces;
@@ -269,9 +254,6 @@
 		A02777782A492046009C3F42 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				A027779D2A492BE6009C3F42 /* DefaultTraceListRepository.swift */,
-				A02777A62A49338E009C3F42 /* DefaultTraceAddRepository.swift */,
-				A93C3D7C2A4AF9620030BA04 /* DefaultTraceDetailRepository.swift */,
 				A93C3D822A4B11370030BA04 /* DefaultTraceRepository.swift */,
 			);
 			path = Repositories;
@@ -422,24 +404,18 @@
 				A02777BA2A493B5C009C3F42 /* CoreDataStorage.xcdatamodeld in Sources */,
 				A027777E2A492076009C3F42 /* NetworkService.swift in Sources */,
 				A93C3D832A4B11370030BA04 /* DefaultTraceRepository.swift in Sources */,
-				A02777A72A49338E009C3F42 /* DefaultTraceAddRepository.swift in Sources */,
-				A02777A92A4933AC009C3F42 /* TraceAddRepository.swift in Sources */,
 				A02777A52A492FA8009C3F42 /* TraceAddViewModel.swift in Sources */,
 				A027778F2A492246009C3F42 /* TraceListViewModel.swift in Sources */,
 				A027777C2A492064009C3F42 /* DataTransferService.swift in Sources */,
 				A9500C5E2A49CB8C0066ADBA /* TraceDetailViewController.swift in Sources */,
 				A09246AB2A4940EF003CBAB4 /* CoreDataStorage.swift in Sources */,
 				A027776E2A491FFE009C3F42 /* AppConfiguration.swift in Sources */,
-				A93C3D7D2A4AF9620030BA04 /* DefaultTraceDetailRepository.swift in Sources */,
 				A027776A2A491FEC009C3F42 /* AppDIContainer.swift in Sources */,
 				A93C3D812A4AFBCE0030BA04 /* TraceDetailUseCase.swift in Sources */,
 				A02777892A4920E7009C3F42 /* Encodable.swift in Sources */,
 				A02777AB2A493424009C3F42 /* TraceAddUseCase.swift in Sources */,
-				A93C3D7F2A4AF9880030BA04 /* TraceDetailRepository.swift in Sources */,
 				A9500C602A49CB960066ADBA /* TraceDetailViewModel.swift in Sources */,
-				A027779E2A492BE6009C3F42 /* DefaultTraceListRepository.swift in Sources */,
 				A09246A92A4940C4003CBAB4 /* TraceStorage.swift in Sources */,
-				A027779C2A492BD8009C3F42 /* TraceListRepository.swift in Sources */,
 				A027774D2A491F60009C3F42 /* AppDelegate.swift in Sources */,
 				A02777932A492466009C3F42 /* TraceListAdapter.swift in Sources */,
 				A02777912A49240D009C3F42 /* TraceListTableViewCell.swift in Sources */,

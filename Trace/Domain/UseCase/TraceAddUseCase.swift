@@ -8,7 +8,7 @@
 import Foundation
 
 protocol TraceAddUseCase {
-    func save(trace: Trace, completion: @escaping (Result<Trace, Error>) -> Void)
+    func save(trace: Trace)
 }
 
 final class DefaultTraceAddUseCase: TraceAddUseCase {
@@ -19,8 +19,8 @@ final class DefaultTraceAddUseCase: TraceAddUseCase {
         self.repository = repository
     }
     
-    func save(trace: Trace, completion: @escaping (Result<Trace, Error>) -> Void) {
-        repository.save(trace: trace, completion: completion)
+    func save(trace: Trace) {
+        repository.save(trace: trace)
     }
     
 }

@@ -66,5 +66,6 @@ extension TraceAddViewController {
     
     @objc private func saveButtonAction() {
         viewModel.didSelectSave(trace: .init(title: traceContentTextView.text, content: traceContentTextView.text))
+        navigationController?.popViewController(animated: true)
     }
 }

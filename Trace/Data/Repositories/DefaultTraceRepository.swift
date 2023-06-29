@@ -26,8 +26,8 @@ extension DefaultTraceRepository {
         return traceStorage.deleteTrace(at: indexPath, completion: completion)
     }
     
-    func save(trace: Trace, completion: @escaping (Result<Trace, Error>) -> Void) {
-        traceStorage.save(trace: trace, completion: completion)
+    func save(trace: Trace) {
+        traceStorage.save(trace: trace)
     }
     
     func updateTrace(at indexPath: IndexPath, with trace: Trace, completion: @escaping (Result<Trace, Error>) -> Void) {
