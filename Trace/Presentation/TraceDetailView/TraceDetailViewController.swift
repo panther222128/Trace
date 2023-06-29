@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import Combine
 
 final class TraceDetailViewController: UIViewController, StoryboardInstantiable {
     
     @IBOutlet weak var traceContentTextView: UITextView!
     
     private var viewModel: TraceDetailViewModel!
+    private var cancellable: Set<AnyCancellable> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,8 +64,19 @@ extension TraceDetailViewController {
         navigationItem.rightBarButtonItem = editButton
     }
     
-    @objc private func updateButtonAction() {
-        traceContentTextView.isEditable = true
-        traceContentTextView.becomeFirstResponder()
+    @objc private func updateButtonAction(_ sender: UIBarButtonItem) {
+        viewModel.didEdit()
+        let buttonState = viewModel.editButtonState
+        updateButtonActionForMode(sender, isEditMode: buttonState)
+    }
+    
+    private func updateButtonActionForMode(_ sender: UIBarButtonItem, isEditMode: Bool) {
+        if !isEditMode {
+            traceContentTextView.isEditable = true
+            traceContentTextView.becomeFirstResponder()
+            navigationController?.navigationItem.rightBarButtonItem?.style = .done
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
     }
 }
