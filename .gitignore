@@ -3,7 +3,8 @@
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
 ## Environment
-Resources/environment
+Resources/
+environment.xcconfig
 
 ## User settings
 xcuserdata/
