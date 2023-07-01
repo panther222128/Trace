@@ -21,4 +21,11 @@ final class AppConfiguration {
         }
         return apiKey
     }()
+    
+    lazy var gcmKey: String = {
+        guard let gcmKey = Bundle.main.object(forInfoDictionaryKey: "ApiKey") as? String else {
+            fatalError("ApiKey must not be empty in plist")
+        }
+        return gcmKey
+    }()
 }

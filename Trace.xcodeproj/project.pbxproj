@@ -46,6 +46,8 @@
 		A9500C5E2A49CB8C0066ADBA /* TraceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9500C5D2A49CB8C0066ADBA /* TraceDetailViewController.swift */; };
 		A9500C602A49CB960066ADBA /* TraceDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9500C5F2A49CB960066ADBA /* TraceDetailViewModel.swift */; };
 		A9500C622A49CC4E0066ADBA /* TraceDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9500C612A49CC4E0066ADBA /* TraceDetailViewController.storyboard */; };
+		A9B14F4B2A5068E800C9D1CA /* Decryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B14F4A2A5068E800C9D1CA /* Decryptor.swift */; };
+		A9B14F4D2A5068EF00C9D1CA /* Encryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B14F4C2A5068EF00C9D1CA /* Encryptor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +92,9 @@
 		A9500C5D2A49CB8C0066ADBA /* TraceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceDetailViewController.swift; sourceTree = "<group>"; };
 		A9500C5F2A49CB960066ADBA /* TraceDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceDetailViewModel.swift; sourceTree = "<group>"; };
 		A9500C612A49CC4E0066ADBA /* TraceDetailViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TraceDetailViewController.storyboard; sourceTree = "<group>"; };
+		A9B14F4A2A5068E800C9D1CA /* Decryptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decryptor.swift; sourceTree = "<group>"; };
+		A9B14F4C2A5068EF00C9D1CA /* Encryptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encryptor.swift; sourceTree = "<group>"; };
+		A9B14F4E2A506D1200C9D1CA /* environment.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = environment.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +181,7 @@
 				A027778C2A49217B009C3F42 /* TraceListViewController.storyboard */,
 				A02777A22A492F6D009C3F42 /* TraceAddViewController.storyboard */,
 				A9500C612A49CC4E0066ADBA /* TraceDetailViewController.storyboard */,
+				A9B14F4E2A506D1200C9D1CA /* environment.xcconfig */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -236,6 +242,8 @@
 		A02777762A49203A009C3F42 /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
+				A9B14F492A5068D900C9D1CA /* Encryptor */,
+				A9B14F482A5068D300C9D1CA /* Decryptor */,
 				A027777A2A49205B009C3F42 /* Network */,
 			);
 			path = Infrastructure;
@@ -326,6 +334,22 @@
 			path = TraceDetailView;
 			sourceTree = "<group>";
 		};
+		A9B14F482A5068D300C9D1CA /* Decryptor */ = {
+			isa = PBXGroup;
+			children = (
+				A9B14F4A2A5068E800C9D1CA /* Decryptor.swift */,
+			);
+			path = Decryptor;
+			sourceTree = "<group>";
+		};
+		A9B14F492A5068D900C9D1CA /* Encryptor */ = {
+			isa = PBXGroup;
+			children = (
+				A9B14F4C2A5068EF00C9D1CA /* Encryptor.swift */,
+			);
+			path = Encryptor;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -399,9 +423,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9B14F4B2A5068E800C9D1CA /* Decryptor.swift in Sources */,
 				A09246AC2A4943EB003CBAB4 /* TraceEntity+CoreDataClass.swift in Sources */,
 				A02777A12A492F62009C3F42 /* TraceAddViewController.swift in Sources */,
 				A02777BA2A493B5C009C3F42 /* CoreDataStorage.xcdatamodeld in Sources */,
+				A9B14F4D2A5068EF00C9D1CA /* Encryptor.swift in Sources */,
 				A027777E2A492076009C3F42 /* NetworkService.swift in Sources */,
 				A93C3D832A4B11370030BA04 /* DefaultTraceRepository.swift in Sources */,
 				A02777A52A492FA8009C3F42 /* TraceAddViewModel.swift in Sources */,
