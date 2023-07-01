@@ -94,7 +94,6 @@
 		A9500C612A49CC4E0066ADBA /* TraceDetailViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TraceDetailViewController.storyboard; sourceTree = "<group>"; };
 		A9B14F4A2A5068E800C9D1CA /* Decryptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decryptor.swift; sourceTree = "<group>"; };
 		A9B14F4C2A5068EF00C9D1CA /* Encryptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encryptor.swift; sourceTree = "<group>"; };
-		A9B14F4E2A506D1200C9D1CA /* environment.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = environment.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,7 +180,6 @@
 				A027778C2A49217B009C3F42 /* TraceListViewController.storyboard */,
 				A02777A22A492F6D009C3F42 /* TraceAddViewController.storyboard */,
 				A9500C612A49CC4E0066ADBA /* TraceDetailViewController.storyboard */,
-				A9B14F4E2A506D1200C9D1CA /* environment.xcconfig */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
