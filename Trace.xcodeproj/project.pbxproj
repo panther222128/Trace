@@ -48,7 +48,6 @@
 		A9500C622A49CC4E0066ADBA /* TraceDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9500C612A49CC4E0066ADBA /* TraceDetailViewController.storyboard */; };
 		A9B14F4B2A5068E800C9D1CA /* Decryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B14F4A2A5068E800C9D1CA /* Decryptor.swift */; };
 		A9B14F4D2A5068EF00C9D1CA /* Encryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B14F4C2A5068EF00C9D1CA /* Encryptor.swift */; };
-		A9B14F502A5070B400C9D1CA /* environment.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A9B14F4F2A5070B400C9D1CA /* environment.xcconfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -95,7 +94,6 @@
 		A9500C612A49CC4E0066ADBA /* TraceDetailViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TraceDetailViewController.storyboard; sourceTree = "<group>"; };
 		A9B14F4A2A5068E800C9D1CA /* Decryptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decryptor.swift; sourceTree = "<group>"; };
 		A9B14F4C2A5068EF00C9D1CA /* Encryptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encryptor.swift; sourceTree = "<group>"; };
-		A9B14F4F2A5070B400C9D1CA /* environment.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = environment.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,7 +180,6 @@
 				A027778C2A49217B009C3F42 /* TraceListViewController.storyboard */,
 				A02777A22A492F6D009C3F42 /* TraceAddViewController.storyboard */,
 				A9500C612A49CC4E0066ADBA /* TraceDetailViewController.storyboard */,
-				A9B14F4F2A5070B400C9D1CA /* environment.xcconfig */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -409,7 +406,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9B14F502A5070B400C9D1CA /* environment.xcconfig in Resources */,
 				A02777592A491F61009C3F42 /* LaunchScreen.storyboard in Resources */,
 				A02777A32A492F6D009C3F42 /* TraceAddViewController.storyboard in Resources */,
 				A02777562A491F61009C3F42 /* Assets.xcassets in Resources */,
