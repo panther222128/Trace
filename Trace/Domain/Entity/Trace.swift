@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Trace {
+struct Trace: Codable {
     let title: String
     let content: String
 }

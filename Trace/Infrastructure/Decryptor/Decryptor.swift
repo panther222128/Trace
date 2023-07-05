@@ -13,22 +13,27 @@ enum DecryptorError: Error {
 }
 
 protocol Decryptor {
-    func decrypt(data: Data) throws -> String
+    func decrypt(data: Data) throws -> Data
 }
 
 final class GCMDecryptor: Decryptor {
     
-    private let key: SymmetricKey
+    private let stringKey: String
     
-    init(key: SymmetricKey) {
-        self.key = key
+    init(stringKey: String) {
+        self.stringKey = stringKey
     }
     
-    func decrypt(data: Data) throws -> String {
+    private func createSymmetrickey(with string: String) throws -> SymmetricKey {
+        guard let data = string.data(using: .utf8) else { throw EncryptorError.cannotCreateStringData }
+        return SymmetricKey(data: data)
+    }
+    
+    func decrypt(data: Data) throws -> Data {
         let sealedBox = try AES.GCM.SealedBox(combined: data)
+        let key = try createSymmetrickey(with: stringKey)
         let decryptedData = try AES.GCM.open(sealedBox, using: key)
-        guard let decryptedString = String(data: decryptedData, encoding: .utf8) else { throw DecryptorError.cannotDecrypt }
-        return decryptedString
+        return decryptedData
     }
     
 }

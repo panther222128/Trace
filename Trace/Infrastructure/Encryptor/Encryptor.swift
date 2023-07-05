@@ -9,24 +9,30 @@ import Foundation
 import CryptoKit
 
 enum EncryptorError: Error {
-    case cannotFindData
     case cannotCreateCombined
+    case cannotCreateStringData
+    case cannotCreateSymmetricKey
 }
 
 protocol Encryptor {
-    func encrypt(text: String) throws -> Data
+    func encrypt(data: Data) throws -> Data
 }
 
 final class GCMEncryptor: Encryptor {
     
-    private let key: SymmetricKey
+    private let stringKey: String
     
-    init(key: SymmetricKey) {
-        self.key = key
+    init(stringKey: String) {
+        self.stringKey = stringKey
     }
     
-    func encrypt(text: String) throws -> Data {
-        guard let data = text.data(using: .utf8) else { throw EncryptorError.cannotFindData }
+    private func createSymmetrickey(with string: String) throws -> SymmetricKey {
+        guard let data = string.data(using: .utf8) else { throw EncryptorError.cannotCreateStringData }
+        return SymmetricKey(data: data)
+    }
+    
+    func encrypt(data: Data) throws -> Data {
+        let key = try createSymmetrickey(with: stringKey)
         let sealedBox = try AES.GCM.seal(data, using: key)
         guard let combined = sealedBox.combined else { throw EncryptorError.cannotCreateCombined }
         return combined

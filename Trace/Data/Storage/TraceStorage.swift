@@ -9,10 +9,10 @@ import Foundation
 import CoreData
 
 protocol TraceStorage {
-    func fetchTraces(completion: @escaping (Result<[Trace], Error>) -> Void)
-    func save(trace: Trace)
-    func deleteTrace(at indexPath: IndexPath, completion: @escaping (Result<[Trace], Error>) -> Void)
-    func updateTrace(at indexPath: IndexPath, with trace: Trace, completion: @escaping (Result<Trace, Error>) -> Void)
+    func fetchTraces(completion: @escaping (Result<[EncryptedTraceEntity], Error>) -> Void)
+    func save(data: Data)
+    func deleteTrace(at indexPath: IndexPath, completion: @escaping (Result<[EncryptedTraceEntity], Error>) -> Void)
+    func updateTrace(at indexPath: IndexPath, with data: Data, completion: @escaping (Result<EncryptedTraceEntity, Error>) -> Void)
 }
 
 final class DefaultTraceStorage {
@@ -26,11 +26,11 @@ final class DefaultTraceStorage {
 }
 
 extension DefaultTraceStorage: TraceStorage {
-    func fetchTraces(completion: @escaping (Result<[Trace], Error>) -> Void) {
+    func fetchTraces(completion: @escaping (Result<[EncryptedTraceEntity], Error>) -> Void) {
         coreDataStorage.performBackgroundTask { context in
             do {
-                let request: NSFetchRequest = TraceEntity.fetchRequest()
-                let result = try context.fetch(request).map { $0.toDomain() }
+                let request: NSFetchRequest = EncryptedTraceEntity.fetchRequest()
+                let result = try context.fetch(request)
                 completion(.success(result))
             } catch {
                 
@@ -38,10 +38,11 @@ extension DefaultTraceStorage: TraceStorage {
         }
     }
 
-    func save(trace: Trace) {
+    func save(data: Data) {
         coreDataStorage.performBackgroundTask { [weak self] context in
             do {
-                let entity = TraceEntity(trace: trace, insertInto: context)
+                let entity = try EncryptedTraceEntity(encryptedData: data, insertInto: context)
+                entity.encryptedTrace = data
                 try context.save()
             } catch {
                 
@@ -49,33 +50,32 @@ extension DefaultTraceStorage: TraceStorage {
         }
     }
     
-    func deleteTrace(at indexPath: IndexPath, completion: @escaping (Result<[Trace], Error>) -> Void) {
+    func deleteTrace(at indexPath: IndexPath, completion: @escaping (Result<[EncryptedTraceEntity], Error>) -> Void) {
         coreDataStorage.performBackgroundTask { [weak self] context in
             do {
-                let request: NSFetchRequest = TraceEntity.fetchRequest()
+                let request: NSFetchRequest = EncryptedTraceEntity.fetchRequest()
                 let result = try context.fetch(request)
                 context.delete(result[indexPath.row])
                 try context.save()
                 
-                completion(.success(result.map { $0.toDomain() }))
+                completion(.success(result))
             } catch {
                 
             }
         }
     }
     
-    func updateTrace(at indexPath: IndexPath, with trace: Trace, completion: @escaping (Result<Trace, Error>) -> Void) {
+    func updateTrace(at indexPath: IndexPath, with data: Data, completion: @escaping (Result<EncryptedTraceEntity, Error>) -> Void) {
         coreDataStorage.performBackgroundTask { [weak self] context in
             do {
-                let request: NSFetchRequest = TraceEntity.fetchRequest()
+                let request: NSFetchRequest = EncryptedTraceEntity.fetchRequest()
                 let traces = try context.fetch(request)
                 let target = traces[indexPath.row]
                 
-                target.setValue(trace.title, forKey: "title")
-                target.setValue(trace.content, forKey: "content")
+                target.setValue(data, forKey: "encryptedTrace")
                 
                 try context.save()
-                completion(.success(trace))
+                completion(.success(target))
             } catch {
                 
             }

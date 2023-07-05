@@ -25,7 +25,7 @@ final class DefaultTraceListUseCase: TraceListUseCase {
     }
     
     func deleteTrace(at indexPath: IndexPath, completion: @escaping (Result<[Trace], Error>) -> Void) {
-        repository.deleteTrace(at: indexPath, completion: completion)
+        return repository.deleteTrace(at: indexPath, completion: completion)
     }
     
 }

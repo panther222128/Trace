@@ -10,7 +10,7 @@ import Combine
 protocol TraceAddViewModel {
     var content: CurrentValueSubject<String, Error> { get }
     
-    func didSelectSave(trace: Trace)
+    func didSelectSave(trace: Trace) throws
 }
 
 final class DefaultTraceAddViewModel: TraceAddViewModel {
@@ -24,8 +24,12 @@ final class DefaultTraceAddViewModel: TraceAddViewModel {
         self.content = CurrentValueSubject(.init())
     }
     
-    func didSelectSave(trace: Trace) {
-        useCase.save(trace: trace)
+    func didSelectSave(trace: Trace) throws {
+        do {
+            try useCase.save(trace: trace)
+        } catch {
+            
+        }
     }
     
 }

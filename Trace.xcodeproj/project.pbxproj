@@ -39,7 +39,7 @@
 		A02777BA2A493B5C009C3F42 /* CoreDataStorage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A02777B82A493B5C009C3F42 /* CoreDataStorage.xcdatamodeld */; };
 		A09246A92A4940C4003CBAB4 /* TraceStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09246A82A4940C4003CBAB4 /* TraceStorage.swift */; };
 		A09246AB2A4940EF003CBAB4 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09246AA2A4940EF003CBAB4 /* CoreDataStorage.swift */; };
-		A09246AC2A4943EB003CBAB4 /* TraceEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02777BB2A493BC0009C3F42 /* TraceEntity+CoreDataClass.swift */; };
+		A93AC0632A51AB6D00EE61D4 /* EncryptedTraceEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93AC0622A51AB6D00EE61D4 /* EncryptedTraceEntity+CoreDataClass.swift */; };
 		A93C3D812A4AFBCE0030BA04 /* TraceDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93C3D802A4AFBCE0030BA04 /* TraceDetailUseCase.swift */; };
 		A93C3D832A4B11370030BA04 /* DefaultTraceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93C3D822A4B11370030BA04 /* DefaultTraceRepository.swift */; };
 		A93C3D852A4B11460030BA04 /* TraceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93C3D842A4B11460030BA04 /* TraceRepository.swift */; };
@@ -84,9 +84,9 @@
 		A02777A42A492FA8009C3F42 /* TraceAddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceAddViewModel.swift; sourceTree = "<group>"; };
 		A02777AA2A493424009C3F42 /* TraceAddUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceAddUseCase.swift; sourceTree = "<group>"; };
 		A02777B92A493B5C009C3F42 /* Trace.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Trace.xcdatamodel; sourceTree = "<group>"; };
-		A02777BB2A493BC0009C3F42 /* TraceEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TraceEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		A09246A82A4940C4003CBAB4 /* TraceStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceStorage.swift; sourceTree = "<group>"; };
 		A09246AA2A4940EF003CBAB4 /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
+		A93AC0622A51AB6D00EE61D4 /* EncryptedTraceEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EncryptedTraceEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		A93C3D802A4AFBCE0030BA04 /* TraceDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceDetailUseCase.swift; sourceTree = "<group>"; };
 		A93C3D822A4B11370030BA04 /* DefaultTraceRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTraceRepository.swift; sourceTree = "<group>"; };
 		A93C3D842A4B11460030BA04 /* TraceRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceRepository.swift; sourceTree = "<group>"; };
@@ -319,7 +319,7 @@
 			isa = PBXGroup;
 			children = (
 				A02777B82A493B5C009C3F42 /* CoreDataStorage.xcdatamodeld */,
-				A02777BB2A493BC0009C3F42 /* TraceEntity+CoreDataClass.swift */,
+				A93AC0622A51AB6D00EE61D4 /* EncryptedTraceEntity+CoreDataClass.swift */,
 				A09246A82A4940C4003CBAB4 /* TraceStorage.swift */,
 				A09246AA2A4940EF003CBAB4 /* CoreDataStorage.swift */,
 			);
@@ -426,7 +426,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9B14F4B2A5068E800C9D1CA /* Decryptor.swift in Sources */,
-				A09246AC2A4943EB003CBAB4 /* TraceEntity+CoreDataClass.swift in Sources */,
 				A02777A12A492F62009C3F42 /* TraceAddViewController.swift in Sources */,
 				A02777BA2A493B5C009C3F42 /* CoreDataStorage.xcdatamodeld in Sources */,
 				A9B14F4D2A5068EF00C9D1CA /* Encryptor.swift in Sources */,
@@ -438,6 +437,7 @@
 				A9500C5E2A49CB8C0066ADBA /* TraceDetailViewController.swift in Sources */,
 				A09246AB2A4940EF003CBAB4 /* CoreDataStorage.swift in Sources */,
 				A027776E2A491FFE009C3F42 /* AppConfiguration.swift in Sources */,
+				A93AC0632A51AB6D00EE61D4 /* EncryptedTraceEntity+CoreDataClass.swift in Sources */,
 				A027776A2A491FEC009C3F42 /* AppDIContainer.swift in Sources */,
 				A93C3D812A4AFBCE0030BA04 /* TraceDetailUseCase.swift in Sources */,
 				A02777892A4920E7009C3F42 /* Encodable.swift in Sources */,
@@ -480,6 +480,7 @@
 /* Begin XCBuildConfiguration section */
 		A027775B2A491F61009C3F42 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A9B14F512A5071BC00C9D1CA /* environment.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -540,6 +541,7 @@
 		};
 		A027775C2A491F61009C3F42 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A9B14F512A5071BC00C9D1CA /* environment.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;

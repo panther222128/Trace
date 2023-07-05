@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="21G83" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="TraceEntity" representedClassName="TraceEntity" syncable="YES">
-        <attribute name="content" optional="YES" attributeType="String"/>
-        <attribute name="title" optional="YES" attributeType="String"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22D68" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="EncryptedTraceEntity" representedClassName="EncryptedTraceEntity" syncable="YES">
+        <attribute name="encryptedTrace" optional="YES" attributeType="Binary"/>
     </entity>
 </model>

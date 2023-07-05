@@ -11,6 +11,8 @@ final class SceneDIContainer: ViewFlowCoordinatorDependencies {
     
     struct Dependencies {
         let apiDataTransferService: DataTransferService
+        let encryptor: Encryptor
+        let decryptor: Decryptor
     }
     
     private let dependencies: Dependencies
@@ -26,7 +28,7 @@ final class SceneDIContainer: ViewFlowCoordinatorDependencies {
     }
     
     func makeTraceRepository() -> TraceRepository {
-        return DefaultTraceRepository(traceStorage: traceStorage)
+        return DefaultTraceRepository(traceStorage: traceStorage, decryptor: dependencies.decryptor, encryptor: dependencies.encryptor)
     }
     
 }

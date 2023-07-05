@@ -17,8 +17,16 @@ final class AppDIContainer {
         return DefaultDataTransferService(networkService: apiDataNetwork)
     }()
     
+    lazy var encryptor: Encryptor = {
+        return GCMEncryptor(stringKey: appConfiguration.gcmKey)
+    }()
+    
+    lazy var decryptor: Decryptor = {
+        return GCMDecryptor(stringKey: appConfiguration.gcmKey)
+    }()
+    
     func makeSceneDIContainer() -> SceneDIContainer {
-        let dependencies = SceneDIContainer.Dependencies(apiDataTransferService: apiDataTransferService)
+        let dependencies = SceneDIContainer.Dependencies(apiDataTransferService: apiDataTransferService, encryptor: encryptor, decryptor: decryptor)
         return SceneDIContainer(dependencies: dependencies)
     }
     
