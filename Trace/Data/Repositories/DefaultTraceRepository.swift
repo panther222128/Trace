@@ -48,16 +48,12 @@ extension DefaultTraceRepository {
         }
     }
     
-    func deleteTrace(at indexPath: IndexPath, completion: @escaping (Result<Trace, Error>) -> Void) {
+    func deleteTrace(at indexPath: IndexPath, completion: @escaping (Result<IndexPath, Error>) -> Void) {
         traceStorage.deleteTrace(at: indexPath) { [weak self] result in
             do {
                 switch result {
-                case .success(let encrypted):
-                    guard let decryptedData = try self?.decryptor.decrypt(data: encrypted[indexPath.row].encryptedTrace) else {
-                        throw TraceRepositoryError.decrypt
-                    }
-                    let decoded = try JSONDecoder().decode(Trace.self, from: decryptedData)
-                    completion(.success(decoded))
+                case .success(_):
+                    completion(.success(indexPath))
                     
                 case .failure(let error):
                     completion(.failure(error))

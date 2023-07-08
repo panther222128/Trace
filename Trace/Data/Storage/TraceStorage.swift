@@ -45,7 +45,6 @@ extension DefaultTraceStorage: TraceStorage {
         }
     }
 
-    // MARK: - [weak self] must be included when this method's self is invoked
     func save(data: Data, completion: @escaping (Result<EncryptedTraceEntity, Error>) -> Void) {
         coreDataStorage.performBackgroundTask { context in
             do {
@@ -59,7 +58,6 @@ extension DefaultTraceStorage: TraceStorage {
         }
     }
     
-    // MARK: - [weak self] must be included when this method's self is invoked
     func deleteTrace(at indexPath: IndexPath, completion: @escaping (Result<[EncryptedTraceEntity], Error>) -> Void) {
         coreDataStorage.performBackgroundTask { context in
             do {
@@ -74,7 +72,6 @@ extension DefaultTraceStorage: TraceStorage {
         }
     }
     
-    // MARK: - [weak self] must be included when this method's self is invoked
     func updateTrace(at indexPath: IndexPath, with data: Data, completion: @escaping (Result<EncryptedTraceEntity, Error>) -> Void) {
         coreDataStorage.performBackgroundTask { context in
             do {
