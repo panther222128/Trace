@@ -6,8 +6,10 @@
 //
 
 import Foundation
+import Combine
 
 protocol TraceDetailViewModel {
+    var error: PassthroughSubject<Error, Never> { get }
     var title: String { get }
     var content: String { get }
     var editButtonState: Bool { get }
@@ -20,6 +22,8 @@ final class DefaultTraceDetailViewModel: TraceDetailViewModel {
     
     private let useCase: TraceDetailUseCase
     
+    private(set) var error: PassthroughSubject<Error, Never>
+    
     private let trace: Trace
     private let indexPath: IndexPath
     private(set) var title: String
@@ -28,6 +32,7 @@ final class DefaultTraceDetailViewModel: TraceDetailViewModel {
     
     init(useCase: TraceDetailUseCase, trace: Trace, indexPath: IndexPath) {
         self.useCase = useCase
+        self.error = PassthroughSubject()
         self.trace = trace
         self.indexPath = indexPath
         self.title = trace.title
@@ -36,13 +41,19 @@ final class DefaultTraceDetailViewModel: TraceDetailViewModel {
     }
     
     func didUpdateTrace(with trace: Trace) {
-        useCase.updateTrace(at: indexPath, with: trace) { result in
-            switch result {
-            case .success(let success):
-                print(success)
-            case .failure(let failure):
-                print(failure)
+        do {
+            try useCase.updateTrace(at: indexPath, with: trace) { [weak self] result in
+                switch result {
+                case .success(let success):
+                    print(success)
+                    
+                case .failure(let error):
+                    self?.error.send(error)
+                    
+                }
             }
+        } catch let error {
+            self.error.send(error)
         }
     }
     

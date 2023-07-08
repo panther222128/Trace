@@ -9,7 +9,7 @@ import Foundation
 
 protocol TraceListUseCase {
     func fetchTraces(completion: @escaping (Result<[Trace], Error>) -> Void)
-    func deleteTrace(at indexPath: IndexPath, completion: @escaping (Result<[Trace], Error>) -> Void)
+    func deleteTrace(at indexPath: IndexPath, completion: @escaping (Result<Trace, Error>) -> Void)
 }
 
 final class DefaultTraceListUseCase: TraceListUseCase {
@@ -24,7 +24,7 @@ final class DefaultTraceListUseCase: TraceListUseCase {
         return repository.fetchTraces(completion: completion)
     }
     
-    func deleteTrace(at indexPath: IndexPath, completion: @escaping (Result<[Trace], Error>) -> Void) {
+    func deleteTrace(at indexPath: IndexPath, completion: @escaping (Result<Trace, Error>) -> Void) {
         return repository.deleteTrace(at: indexPath, completion: completion)
     }
     

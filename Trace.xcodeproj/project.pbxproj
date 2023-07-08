@@ -39,6 +39,7 @@
 		A02777BA2A493B5C009C3F42 /* CoreDataStorage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A02777B82A493B5C009C3F42 /* CoreDataStorage.xcdatamodeld */; };
 		A09246A92A4940C4003CBAB4 /* TraceStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09246A82A4940C4003CBAB4 /* TraceStorage.swift */; };
 		A09246AB2A4940EF003CBAB4 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09246AA2A4940EF003CBAB4 /* CoreDataStorage.swift */; };
+		A937B34D2A59563200108CBE /* UIViewController+Alertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A937B34C2A59563200108CBE /* UIViewController+Alertable.swift */; };
 		A93AC0632A51AB6D00EE61D4 /* EncryptedTraceEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93AC0622A51AB6D00EE61D4 /* EncryptedTraceEntity+CoreDataClass.swift */; };
 		A93C3D812A4AFBCE0030BA04 /* TraceDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93C3D802A4AFBCE0030BA04 /* TraceDetailUseCase.swift */; };
 		A93C3D832A4B11370030BA04 /* DefaultTraceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93C3D822A4B11370030BA04 /* DefaultTraceRepository.swift */; };
@@ -86,6 +87,7 @@
 		A02777B92A493B5C009C3F42 /* Trace.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Trace.xcdatamodel; sourceTree = "<group>"; };
 		A09246A82A4940C4003CBAB4 /* TraceStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceStorage.swift; sourceTree = "<group>"; };
 		A09246AA2A4940EF003CBAB4 /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
+		A937B34C2A59563200108CBE /* UIViewController+Alertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alertable.swift"; sourceTree = "<group>"; };
 		A93AC0622A51AB6D00EE61D4 /* EncryptedTraceEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EncryptedTraceEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		A93C3D802A4AFBCE0030BA04 /* TraceDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceDetailUseCase.swift; sourceTree = "<group>"; };
 		A93C3D822A4B11370030BA04 /* DefaultTraceRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTraceRepository.swift; sourceTree = "<group>"; };
@@ -292,6 +294,7 @@
 			children = (
 				A02777862A4920E1009C3F42 /* Dictionary.swift */,
 				A02777882A4920E7009C3F42 /* Encodable.swift */,
+				A937B34C2A59563200108CBE /* UIViewController+Alertable.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -455,6 +458,7 @@
 				A93C3D852A4B11460030BA04 /* TraceRepository.swift in Sources */,
 				A02777952A49261E009C3F42 /* TraceListItemViewModel.swift in Sources */,
 				A027776C2A491FF4009C3F42 /* SceneDIContainer.swift in Sources */,
+				A937B34D2A59563200108CBE /* UIViewController+Alertable.swift in Sources */,
 				A027778B2A492150009C3F42 /* APIEndpoints.swift in Sources */,
 				A027774F2A491F60009C3F42 /* SceneDelegate.swift in Sources */,
 				A02777872A4920E1009C3F42 /* Dictionary.swift in Sources */,

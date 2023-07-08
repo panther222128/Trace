@@ -18,6 +18,7 @@ final class TraceDetailViewController: UIViewController, StoryboardInstantiable 
     override func viewDidLoad() {
         super.viewDidLoad()
         traceContentTextView.delegate = self
+        subscribeError()
         setUpdateButton()
         set(contentTextView: traceContentTextView)
         
@@ -49,6 +50,19 @@ final class TraceDetailViewController: UIViewController, StoryboardInstantiable 
         traceContentTextView.verticalScrollIndicatorInsets = .zero
     }
     
+}
+
+extension TraceDetailViewController {
+    private func subscribeError() {
+        viewModel.error
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                
+            } receiveValue: { [weak self] error in
+                self?.presentAlert(of: error)
+            }
+            .store(in: &cancellable)
+    }
 }
 
 extension TraceDetailViewController: UITextViewDelegate {

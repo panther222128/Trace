@@ -25,10 +25,11 @@ final class TraceListViewController: UIViewController, StoryboardInstantiable {
         traceListAdapter = TraceListAdapter(tableView: traceListTableView, dataSource: viewModel, delegate: self)
         setAddButton()
         subscribeItem()
+        subscribeError()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         viewModel.didFetchItems()
     }
     
@@ -45,10 +46,21 @@ extension TraceListViewController {
     private func subscribeItem() {
         viewModel.items
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] success in
-                self?.traceListTableView.reloadData()
+            .sink { [weak self] _ in
+                
             } receiveValue: { [weak self] _ in
                 self?.traceListTableView.reloadData()
+            }
+            .store(in: &cancellable)
+    }
+    
+    private func subscribeError() {
+        viewModel.error
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                
+            } receiveValue: { [weak self] error in
+                self?.presentAlert(of: error)
             }
             .store(in: &cancellable)
     }

@@ -8,9 +8,16 @@
 import Foundation
 import CoreData
 
+enum TraceStorageError: Error {
+    case fetch
+    case save
+    case delete
+    case update
+}
+
 protocol TraceStorage {
     func fetchTraces(completion: @escaping (Result<[EncryptedTraceEntity], Error>) -> Void)
-    func save(data: Data)
+    func save(data: Data, completion: @escaping (Result<EncryptedTraceEntity, Error>) -> Void)
     func deleteTrace(at indexPath: IndexPath, completion: @escaping (Result<[EncryptedTraceEntity], Error>) -> Void)
     func updateTrace(at indexPath: IndexPath, with data: Data, completion: @escaping (Result<EncryptedTraceEntity, Error>) -> Void)
 }
@@ -33,40 +40,43 @@ extension DefaultTraceStorage: TraceStorage {
                 let result = try context.fetch(request)
                 completion(.success(result))
             } catch {
-                
+                completion(.failure(TraceStorageError.fetch))
             }
         }
     }
 
-    func save(data: Data) {
-        coreDataStorage.performBackgroundTask { [weak self] context in
+    // MARK: - [weak self] must be included when this method's self is invoked
+    func save(data: Data, completion: @escaping (Result<EncryptedTraceEntity, Error>) -> Void) {
+        coreDataStorage.performBackgroundTask { context in
             do {
                 let entity = try EncryptedTraceEntity(encryptedData: data, insertInto: context)
                 entity.encryptedTrace = data
                 try context.save()
+                completion(.success(entity))
             } catch {
-                
+                completion(.failure(TraceStorageError.save))
             }
         }
     }
     
+    // MARK: - [weak self] must be included when this method's self is invoked
     func deleteTrace(at indexPath: IndexPath, completion: @escaping (Result<[EncryptedTraceEntity], Error>) -> Void) {
-        coreDataStorage.performBackgroundTask { [weak self] context in
+        coreDataStorage.performBackgroundTask { context in
             do {
                 let request: NSFetchRequest = EncryptedTraceEntity.fetchRequest()
                 let result = try context.fetch(request)
                 context.delete(result[indexPath.row])
                 try context.save()
-                
                 completion(.success(result))
             } catch {
-                
+                completion(.failure(TraceStorageError.delete))
             }
         }
     }
     
+    // MARK: - [weak self] must be included when this method's self is invoked
     func updateTrace(at indexPath: IndexPath, with data: Data, completion: @escaping (Result<EncryptedTraceEntity, Error>) -> Void) {
-        coreDataStorage.performBackgroundTask { [weak self] context in
+        coreDataStorage.performBackgroundTask { context in
             do {
                 let request: NSFetchRequest = EncryptedTraceEntity.fetchRequest()
                 let traces = try context.fetch(request)
@@ -77,7 +87,7 @@ extension DefaultTraceStorage: TraceStorage {
                 try context.save()
                 completion(.success(target))
             } catch {
-                
+                completion(.failure(TraceStorageError.update))
             }
         }
     }

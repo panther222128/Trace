@@ -8,7 +8,7 @@
 import Foundation
 
 protocol TraceDetailUseCase {
-    func updateTrace(at indexPath: IndexPath, with trace: Trace, completion: @escaping (Result<Trace, Error>) -> Void)
+    func updateTrace(at indexPath: IndexPath, with trace: Trace, completion: @escaping (Result<Trace, Error>) -> Void) throws
 }
 
 final class DefaultTraceDetailUseCase: TraceDetailUseCase {
@@ -19,8 +19,8 @@ final class DefaultTraceDetailUseCase: TraceDetailUseCase {
         self.repository = repository
     }
     
-    func updateTrace(at indexPath: IndexPath, with trace: Trace, completion: @escaping (Result<Trace, Error>) -> Void) {
-        repository.updateTrace(at: indexPath, with: trace, completion: completion)
+    func updateTrace(at indexPath: IndexPath, with trace: Trace, completion: @escaping (Result<Trace, Error>) -> Void) throws {
+        return try repository.updateTrace(at: indexPath, with: trace, completion: completion)
     }
     
 }

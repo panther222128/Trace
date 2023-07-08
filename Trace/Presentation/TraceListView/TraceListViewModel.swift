@@ -8,6 +8,10 @@
 import Combine
 import Foundation
 
+enum TraceListViewModelError: Error {
+    case cannotFindViewModel
+}
+
 protocol TraceListViewModel: TraceListDataSource {
     var items: CurrentValueSubject<[TraceListItemViewModel], Error> { get }
     var error: PassthroughSubject<Error, Never> { get }
@@ -54,8 +58,8 @@ final class DefaultTraceListViewModel: TraceListViewModel {
                 self?.traces = traces
                 self?.items.value = traces.map { .init(trace: $0) }
                 
-            case .failure(let failure):
-                print(failure)
+            case .failure(let error):
+                self?.error.send(error)
                 
             }
         })
@@ -64,14 +68,18 @@ final class DefaultTraceListViewModel: TraceListViewModel {
     func didDeleteItem(at indexPath: IndexPath) {
         useCase.deleteTrace(at: indexPath) { [weak self] result in
             switch result {
-            case .success(let traces):
-                self?.traces.remove(at: indexPath.row)
-                self?.items.value = traces.map { .init(trace: $0) }
+            case .success(_):
+                guard let self = self else {
+                    self?.error.send(TraceListViewModelError.cannotFindViewModel)
+                    return
+                }
+                self.traces.remove(at: indexPath.row)
+                self.items.value = self.traces.map { .init(trace: $0) }
                 
-            case .failure(let failure):
-                print(failure)
+            case .failure(let error):
+                self?.error.send(error)
+                
             }
-            
         }
     }
     

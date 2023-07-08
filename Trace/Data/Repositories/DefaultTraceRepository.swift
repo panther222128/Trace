@@ -7,6 +7,13 @@
 
 import Foundation
 
+enum TraceRepositoryError: Error {
+    case decrypt
+    case encrypt
+    case decode
+    case encode
+}
+
 final class DefaultTraceRepository: TraceRepository {
 
     private var traceStorage: TraceStorage
@@ -27,65 +34,68 @@ extension DefaultTraceRepository {
             do {
                 switch result {
                 case .success(let entity):
-                    let decryptedData = try entity.map { try self?.decryptor.decrypt(data: $0.encryptedTrace) }
-                    let decoded = try decryptedData.map { try JSONDecoder().decode(Trace.self, from: $0 ?? Data()) }
+                    let decryptedData = try entity.compactMap { try self?.decryptor.decrypt(data: $0.encryptedTrace) }
+                    let decoded = try decryptedData.map { try JSONDecoder().decode(Trace.self, from: $0) }
                     completion(.success(decoded))
                     
                 case .failure(let error):
                     completion(.failure(error))
                     
                 }
-            } catch {
-                
+            } catch let error {
+                completion(.failure(error))
             }
         }
     }
     
-    func deleteTrace(at indexPath: IndexPath, completion: @escaping (Result<[Trace], Error>) -> Void) {
+    func deleteTrace(at indexPath: IndexPath, completion: @escaping (Result<Trace, Error>) -> Void) {
         traceStorage.deleteTrace(at: indexPath) { [weak self] result in
             do {
                 switch result {
-                case .success(let data):
-                    let decryptedData = try data.map { try self?.decryptor.decrypt(data: $0.encryptedTrace) }
-                    let decoded = try decryptedData.map { try JSONDecoder().decode(Trace.self, from: $0 ?? Data()) }
+                case .success(let encrypted):
+                    guard let decryptedData = try self?.decryptor.decrypt(data: encrypted[indexPath.row].encryptedTrace) else {
+                        throw TraceRepositoryError.decrypt
+                    }
+                    let decoded = try JSONDecoder().decode(Trace.self, from: decryptedData)
                     completion(.success(decoded))
                     
                 case .failure(let error):
                     completion(.failure(error))
                     
                 }
-            } catch {
+            } catch let error {
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func save(trace: Trace, completion: @escaping (Result<Trace, Error>) -> Void) throws {
+        let traceData = try JSONEncoder().encode(trace)
+        let encryptedData = try encryptor.encrypt(data: traceData)
+        traceStorage.save(data: encryptedData) { result in
+            switch result {
+            case .success(_):
+                completion(.success(trace))
+                
+            case .failure(let error):
+                completion(.failure(error))
                 
             }
         }
     }
     
-    func save(trace: Trace) throws {
-        do {
-            let traceData = try JSONEncoder().encode(trace)
-            let encryptedData = try encryptor.encrypt(data: traceData)
-            traceStorage.save(data: encryptedData)
-        } catch {
+    func updateTrace(at indexPath: IndexPath, with trace: Trace, completion: @escaping (Result<Trace, Error>) -> Void) throws {
+        let encoded = try JSONEncoder().encode(trace)
+        let encrypted = try encryptor.encrypt(data: encoded)
+        traceStorage.updateTrace(at: indexPath, with: encrypted) { result in
+            switch result {
+            case .success(_):
+                completion(.success(trace))
             
-        }
-    }
-    
-    func updateTrace(at indexPath: IndexPath, with trace: Trace, completion: @escaping (Result<Trace, Error>) -> Void) {
-        do {
-            let encoded = try JSONEncoder().encode(trace)
-            let encrypted = try encryptor.encrypt(data: encoded)
-            traceStorage.updateTrace(at: indexPath, with: encrypted) { result in
-                switch result {
-                case .success(_):
-                    completion(.success(trace))
-                    
-                case .failure(let error):
-                    completion(.failure(error))
-                    
-                }
+            case .failure(let error):
+                completion(.failure(error))
+                
             }
-        } catch {
-            
         }
     }
 }

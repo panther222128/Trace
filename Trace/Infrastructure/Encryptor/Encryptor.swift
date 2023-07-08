@@ -11,7 +11,6 @@ import CryptoKit
 enum EncryptorError: Error {
     case cannotCreateCombined
     case cannotCreateStringData
-    case cannotCreateSymmetricKey
 }
 
 protocol Encryptor {

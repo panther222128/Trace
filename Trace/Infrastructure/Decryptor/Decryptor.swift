@@ -10,6 +10,7 @@ import CryptoKit
 
 enum DecryptorError: Error {
     case cannotDecrypt
+    case cannotCreateStringData
 }
 
 protocol Decryptor {
@@ -25,7 +26,7 @@ final class GCMDecryptor: Decryptor {
     }
     
     private func createSymmetrickey(with string: String) throws -> SymmetricKey {
-        guard let data = string.data(using: .utf8) else { throw EncryptorError.cannotCreateStringData }
+        guard let data = string.data(using: .utf8) else { throw DecryptorError.cannotCreateStringData }
         return SymmetricKey(data: data)
     }
     

@@ -18,6 +18,7 @@ final class TraceAddViewController: UIViewController, StoryboardInstantiable {
     override func viewDidLoad() {
         super.viewDidLoad()
         subscribeContent()
+        subscribeError()
         setDoneButton()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -55,6 +56,17 @@ extension TraceAddViewController {
             }
             .store(in: &cancellable)
     }
+    
+    private func subscribeError() {
+        viewModel.error
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                
+            } receiveValue: { [weak self] error in
+                self?.presentAlert(of: error)
+            }
+            .store(in: &cancellable)
+    }
 }
 
 // MARK: - Save trace button
@@ -67,9 +79,9 @@ extension TraceAddViewController {
     @objc private func saveButtonAction() {
         do {
             try viewModel.didSelectSave(trace: .init(title: traceContentTextView.text, content: traceContentTextView.text))
+            navigationController?.popViewController(animated: true)
         } catch {
             
         }
-        navigationController?.popViewController(animated: true)
-    }
+     }
 }
