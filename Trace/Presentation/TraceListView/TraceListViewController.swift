@@ -44,7 +44,7 @@ final class TraceListViewController: UIViewController, StoryboardInstantiable {
 // MARK: - Subscribe
 extension TraceListViewController {
     private func subscribeItem() {
-        viewModel.items
+        viewModel.itemsPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 
@@ -55,7 +55,7 @@ extension TraceListViewController {
     }
     
     private func subscribeError() {
-        viewModel.error
+        viewModel.errorPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 

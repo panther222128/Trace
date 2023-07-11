@@ -18,12 +18,20 @@ final class TraceDetailViewController: UIViewController, StoryboardInstantiable 
     override func viewDidLoad() {
         super.viewDidLoad()
         traceContentTextView.delegate = self
+        subscribeContent()
         subscribeError()
         setUpdateButton()
         set(contentTextView: traceContentTextView)
         
+        viewModel.didLoadTrace()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        viewModel.didUpdateTrace()
     }
 
     static func create(with viewModel: TraceDetailViewModel) -> TraceDetailViewController {
@@ -34,7 +42,6 @@ final class TraceDetailViewController: UIViewController, StoryboardInstantiable 
     
     private func set(contentTextView: UITextView) {
         contentTextView.isEditable = false
-        contentTextView.text = viewModel.content
     }
     
     @objc private func keyboardWillShow(_ notification: Notification) {
@@ -53,8 +60,19 @@ final class TraceDetailViewController: UIViewController, StoryboardInstantiable 
 }
 
 extension TraceDetailViewController {
+    private func subscribeContent() {
+        viewModel.contentPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                
+            } receiveValue: { [weak self] content in
+                self?.traceContentTextView.text = content
+            }
+            .store(in: &cancellable)
+    }
+    
     private func subscribeError() {
-        viewModel.error
+        viewModel.errorPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 
@@ -67,7 +85,7 @@ extension TraceDetailViewController {
 
 extension TraceDetailViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
-        viewModel.didUpdateTrace(with: .init(title: textView.text, content: textView.text))
+        viewModel.didEditTrace(for: textView.text)
     }
 }
 

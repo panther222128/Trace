@@ -47,7 +47,7 @@ final class TraceAddViewController: UIViewController, StoryboardInstantiable {
 
 extension TraceAddViewController {
     private func subscribeContent() {
-        viewModel.content
+        viewModel.contentPublisher
             .receive(on: DispatchQueue.main)
             .sink { success in
                 
@@ -58,7 +58,7 @@ extension TraceAddViewController {
     }
     
     private func subscribeError() {
-        viewModel.error
+        viewModel.errorPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 

@@ -9,12 +9,14 @@ import Foundation
 import Combine
 
 protocol TraceDetailViewModel {
-    var error: PassthroughSubject<Error, Never> { get }
-    var title: String { get }
-    var content: String { get }
+    var errorPublisher: AnyPublisher<Error, Never> { get }
+    var titlePublisher: AnyPublisher<String, Never> { get }
+    var contentPublisher: AnyPublisher<String, Never> { get }
     var editButtonState: Bool { get }
     
-    func didUpdateTrace(with trace: Trace)
+    func didLoadTrace()
+    func didEditTrace(for text: String)
+    func didUpdateTrace()
     func didEdit()
 }
 
@@ -22,27 +24,51 @@ final class DefaultTraceDetailViewModel: TraceDetailViewModel {
     
     private let useCase: TraceDetailUseCase
     
-    private(set) var error: PassthroughSubject<Error, Never>
+    private let title: CurrentValueSubject<String, Never>
+    private let content: CurrentValueSubject<String, Never>
+    private let error: PassthroughSubject<Error, Never>
     
-    private let trace: Trace
+    var titlePublisher: AnyPublisher<String, Never> {
+        return title.eraseToAnyPublisher()
+    }
+    var contentPublisher: AnyPublisher<String, Never> {
+        return content.eraseToAnyPublisher()
+    }
+    var errorPublisher: AnyPublisher<Error, Never> {
+        return error.eraseToAnyPublisher()
+    }
+    
+    private var traceTitle: String
+    private var traceContent: String
     private let indexPath: IndexPath
-    private(set) var title: String
-    private(set) var content: String
     private(set) var editButtonState: Bool
     
     init(useCase: TraceDetailUseCase, trace: Trace, indexPath: IndexPath) {
         self.useCase = useCase
+        self.title = CurrentValueSubject(trace.title)
+        self.content = CurrentValueSubject(trace.content)
         self.error = PassthroughSubject()
-        self.trace = trace
+        self.traceTitle = trace.title
+        self.traceContent = trace.content
         self.indexPath = indexPath
-        self.title = trace.title
-        self.content = trace.content
         self.editButtonState = true
     }
     
-    func didUpdateTrace(with trace: Trace) {
+    func didLoadTrace() {
+        title.send(traceTitle)
+        content.send(traceContent)
+    }
+    
+    func didEditTrace(for text: String) {
+        title.value = text
+        content.value = text
+        traceTitle = text
+        traceContent = text
+    }
+    
+    func didUpdateTrace() {
         do {
-            try useCase.updateTrace(at: indexPath, with: trace) { [weak self] result in
+            try useCase.updateTrace(at: indexPath, with: .init(title: traceTitle, content: traceContent)) { [weak self] result in
                 switch result {
                 case .success(let success):
                     print(success)

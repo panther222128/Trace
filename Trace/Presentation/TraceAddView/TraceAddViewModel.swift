@@ -8,8 +8,8 @@
 import Combine
 
 protocol TraceAddViewModel {
-    var error: PassthroughSubject<Error, Never> { get }
-    var content: CurrentValueSubject<String, Error> { get }
+    var contentPublisher: AnyPublisher<String, Error> { get }
+    var errorPublisher: AnyPublisher<Error, Never> { get }
     
     func didSelectSave(trace: Trace) throws
 }
@@ -18,8 +18,15 @@ final class DefaultTraceAddViewModel: TraceAddViewModel {
     
     private let useCase: TraceAddUseCase
     
-    private(set) var content: CurrentValueSubject<String, Error>
-    private(set) var error: PassthroughSubject<Error, Never>
+    private let content: CurrentValueSubject<String, Error>
+    private let error: PassthroughSubject<Error, Never>
+    
+    var contentPublisher: AnyPublisher<String, Error> {
+        content.eraseToAnyPublisher()
+    }
+    var errorPublisher: AnyPublisher<Error, Never> {
+        error.eraseToAnyPublisher()
+    }
     
     init(useCase: TraceAddUseCase) {
         self.useCase = useCase

@@ -13,8 +13,8 @@ enum TraceListViewModelError: Error {
 }
 
 protocol TraceListViewModel: TraceListDataSource {
-    var items: CurrentValueSubject<[TraceListItemViewModel], Error> { get }
-    var error: PassthroughSubject<Error, Never> { get }
+    var itemsPublisher: AnyPublisher<[TraceListItemViewModel], Error> { get }
+    var errorPublisher: AnyPublisher<Error, Never> { get }
     
     func didSelectAdd()
     func didSelectItem(at indexPath: IndexPath)
@@ -33,8 +33,15 @@ final class DefaultTraceListViewModel: TraceListViewModel {
     private let action: TraceListAction
     
     private var traces: [Trace] = []
-    private(set) var items: CurrentValueSubject<[TraceListItemViewModel], Error>
-    private(set) var error: PassthroughSubject<Error, Never>
+    private let items: CurrentValueSubject<[TraceListItemViewModel], Error>
+    private let error: PassthroughSubject<Error, Never>
+    
+    var itemsPublisher: AnyPublisher<[TraceListItemViewModel], Error> {
+        items.eraseToAnyPublisher()
+    }
+    var errorPublisher: AnyPublisher<Error, Never> {
+        error.eraseToAnyPublisher()
+    }
     
     init(useCase: TraceListUseCase, action: TraceListAction) {
         self.useCase = useCase
