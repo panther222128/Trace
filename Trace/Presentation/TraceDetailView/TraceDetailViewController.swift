@@ -21,6 +21,7 @@ final class TraceDetailViewController: UIViewController, StoryboardInstantiable 
         subscribeContent()
         subscribeError()
         setUpdateButton()
+        subscribeMode()
         set(contentTextView: traceContentTextView)
         
         viewModel.didLoadTrace()
@@ -81,6 +82,30 @@ extension TraceDetailViewController {
             }
             .store(in: &cancellable)
     }
+    
+    private func subscribeMode() {
+        viewModel.detailModePublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                
+            } receiveValue: { [weak self] mode in
+                switch mode {
+                case .read:
+                    self?.traceContentTextView.isEditable = false
+                    
+                case .edit:
+                    self?.traceContentTextView.isEditable = true
+                    self?.traceContentTextView.becomeFirstResponder()
+                    self?.navigationController?.navigationItem.rightBarButtonItem?.style = .done
+                    
+                case .save:
+                    self?.navigationController?.popViewController(animated: true)
+                    
+                }
+            }
+            .store(in: &cancellable)
+
+    }
 }
 
 extension TraceDetailViewController: UITextViewDelegate {
@@ -98,17 +123,9 @@ extension TraceDetailViewController {
     
     @objc private func updateButtonAction(_ sender: UIBarButtonItem) {
         viewModel.didEdit()
-        let buttonState = viewModel.editButtonState
-        updateButtonActionForMode(sender, isEditMode: buttonState)
     }
     
     private func updateButtonActionForMode(_ sender: UIBarButtonItem, isEditMode: Bool) {
-        if !isEditMode {
-            traceContentTextView.isEditable = true
-            traceContentTextView.becomeFirstResponder()
-            navigationController?.navigationItem.rightBarButtonItem?.style = .done
-        } else {
-            navigationController?.popViewController(animated: true)
-        }
+        
     }
 }

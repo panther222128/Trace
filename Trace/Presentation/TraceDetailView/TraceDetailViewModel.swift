@@ -12,7 +12,7 @@ protocol TraceDetailViewModel {
     var errorPublisher: AnyPublisher<Error, Never> { get }
     var titlePublisher: AnyPublisher<String, Never> { get }
     var contentPublisher: AnyPublisher<String, Never> { get }
-    var editButtonState: Bool { get }
+    var detailModePublisher: AnyPublisher<DefaultTraceDetailViewModel.DetailMode, Never> { get }
     
     func didLoadTrace()
     func didEditTrace(for text: String)
@@ -22,11 +22,18 @@ protocol TraceDetailViewModel {
 
 final class DefaultTraceDetailViewModel: TraceDetailViewModel {
     
+    enum DetailMode {
+        case read
+        case edit
+        case save
+    }
+    
     private let useCase: TraceDetailUseCase
     
     private let title: CurrentValueSubject<String, Never>
     private let content: CurrentValueSubject<String, Never>
     private let error: PassthroughSubject<Error, Never>
+    private let mode: CurrentValueSubject<DetailMode, Never>
     
     var titlePublisher: AnyPublisher<String, Never> {
         return title.eraseToAnyPublisher()
@@ -37,21 +44,25 @@ final class DefaultTraceDetailViewModel: TraceDetailViewModel {
     var errorPublisher: AnyPublisher<Error, Never> {
         return error.eraseToAnyPublisher()
     }
+    var detailModePublisher: AnyPublisher<DetailMode, Never> {
+        return mode.eraseToAnyPublisher()
+    }
     
     private var traceTitle: String
     private var traceContent: String
     private let indexPath: IndexPath
-    private(set) var editButtonState: Bool
+    private var detailMode: DetailMode
     
     init(useCase: TraceDetailUseCase, trace: Trace, indexPath: IndexPath) {
         self.useCase = useCase
         self.title = CurrentValueSubject(trace.title)
         self.content = CurrentValueSubject(trace.content)
         self.error = PassthroughSubject()
+        self.mode = CurrentValueSubject(.read)
         self.traceTitle = trace.title
         self.traceContent = trace.content
         self.indexPath = indexPath
-        self.editButtonState = true
+        self.detailMode = .read
     }
     
     func didLoadTrace() {
@@ -84,7 +95,20 @@ final class DefaultTraceDetailViewModel: TraceDetailViewModel {
     }
     
     func didEdit() {
-        editButtonState.toggle()
+        switch detailMode {
+        case .read:
+            self.detailMode = .edit
+            mode.send(detailMode)
+            
+        case .edit:
+            self.detailMode = .save
+            mode.send(detailMode)
+            
+        case .save:
+            self.detailMode = .read
+            mode.send(detailMode)
+            
+        }
     }
     
 }
