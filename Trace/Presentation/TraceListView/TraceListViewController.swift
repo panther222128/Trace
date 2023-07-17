@@ -22,10 +22,11 @@ final class TraceListViewController: UIViewController, StoryboardInstantiable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        set(traceListTableView: traceListTableView)
         traceListAdapter = TraceListAdapter(tableView: traceListTableView, dataSource: viewModel, delegate: self)
         setAddButton()
-        subscribeItem()
-        subscribeError()
+        subscribeItem(from: viewModel)
+        subscribeError(from: viewModel)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -39,11 +40,16 @@ final class TraceListViewController: UIViewController, StoryboardInstantiable {
         return viewController
     }
     
+    private func set(traceListTableView: UITableView) {
+        traceListTableView.showsVerticalScrollIndicator = false
+        traceListTableView.showsHorizontalScrollIndicator = false
+    }
+    
 }
 
 // MARK: - Subscribe
 extension TraceListViewController {
-    private func subscribeItem() {
+    private func subscribeItem(from viewModel: TraceListViewModel) {
         viewModel.itemsPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
@@ -54,7 +60,7 @@ extension TraceListViewController {
             .store(in: &cancellable)
     }
     
-    private func subscribeError() {
+    private func subscribeError(from viewModel: TraceListViewModel) {
         viewModel.errorPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in

@@ -17,11 +17,12 @@ final class TraceDetailViewController: UIViewController, StoryboardInstantiable 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        traceContentTextView.delegate = self
-        subscribeContent()
-        subscribeError()
+        set(traceContentTextView: traceContentTextView)
         setUpdateButton()
-        subscribeMode()
+        traceContentTextView.delegate = self
+        subscribeContent(from: viewModel)
+        subscribeError(from: viewModel)
+        subscribeMode(from: viewModel)
         set(contentTextView: traceContentTextView)
         
         viewModel.didLoadTrace()
@@ -39,6 +40,11 @@ final class TraceDetailViewController: UIViewController, StoryboardInstantiable 
         let viewController = TraceDetailViewController.instantiateViewController()
         viewController.viewModel = viewModel
         return viewController
+    }
+    
+    private func set(traceContentTextView: UITextView) {
+        traceContentTextView.showsVerticalScrollIndicator = false
+        traceContentTextView.showsHorizontalScrollIndicator = false
     }
     
     private func set(contentTextView: UITextView) {
@@ -61,7 +67,7 @@ final class TraceDetailViewController: UIViewController, StoryboardInstantiable 
 }
 
 extension TraceDetailViewController {
-    private func subscribeContent() {
+    private func subscribeContent(from viewModel: TraceDetailViewModel) {
         viewModel.contentPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
@@ -72,7 +78,7 @@ extension TraceDetailViewController {
             .store(in: &cancellable)
     }
     
-    private func subscribeError() {
+    private func subscribeError(from viewModel: TraceDetailViewModel) {
         viewModel.errorPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
@@ -83,7 +89,7 @@ extension TraceDetailViewController {
             .store(in: &cancellable)
     }
     
-    private func subscribeMode() {
+    private func subscribeMode(from viewModel: TraceDetailViewModel) {
         viewModel.detailModePublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
@@ -123,9 +129,5 @@ extension TraceDetailViewController {
     
     @objc private func updateButtonAction(_ sender: UIBarButtonItem) {
         viewModel.didEdit()
-    }
-    
-    private func updateButtonActionForMode(_ sender: UIBarButtonItem, isEditMode: Bool) {
-        
     }
 }
